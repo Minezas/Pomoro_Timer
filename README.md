@@ -14,7 +14,7 @@ This Python script provides a Pomodoro timer GUI built with Tkinter. The Pomodor
 
 ## Usage
 1. Ensure you have Python installed on your system.
-2. Run the script using `python pomodoro_timer.py`.
+2. Run the script using `python pomodoro_project.py`.
 3. Input your desired focus and break times (in minutes) into the respective entry fields.
 4. Click "Start Pomodoro" to begin the timer.
 5. During the focus period, work on your task until the timer completes.
