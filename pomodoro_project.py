@@ -5,22 +5,27 @@ import winsound
 import webbrowser
 
 def play_beep(frequency, duration):
+    """Play a beep sound."""
     winsound.Beep(frequency, duration)
 
 def play_music():
+    """Play background music."""
     music_url = "https://www.youtube.com/watch?v=Tq7523sJc6I&t=4s&ab_channel=MimiLofiChill"
     webbrowser.open(music_url, new=1)
 
 def stop_music():
+    """Stop the music playback."""
     # You may need to implement a way to stop the music playback from the browser
     pass
 
 def play_pomodoro(focus_time, break_time, countdown_label):
+    """Run the Pomodoro timer."""
     play_music()
 
     start_focus = time.time()
     end_focus = start_focus + (focus_time * 60)
 
+    # Countdown for focus time
     while time.time() < end_focus:
         remaining_time = int(end_focus - time.time())
         countdown_label.config(text="Focus time remaining: {:02d}:{:02d}".format(remaining_time // 60, remaining_time % 60))
@@ -35,6 +40,7 @@ def play_pomodoro(focus_time, break_time, countdown_label):
 
     play_beep(1000, 1000)  # Beep at the start of break time
 
+    # Countdown for break time
     while time.time() < end_break:
         remaining_time = int(end_break - time.time())
         countdown_label.config(text="Break time remaining: {:02d}:{:02d}".format(remaining_time // 60, remaining_time % 60))
@@ -44,6 +50,7 @@ def play_pomodoro(focus_time, break_time, countdown_label):
     countdown_label.config(text="Break's over!")
 
 def start_pomodoro(focus_entry, break_entry, countdown_label, end_button):
+    """Start the Pomodoro timer."""
     focus_time = int(focus_entry.get()) if focus_entry.get() else 25  # Default focus time (25 minutes)
     break_time = int(break_entry.get()) if break_entry.get() else 5   # Default break time (5 minutes)
 
@@ -55,12 +62,14 @@ def start_pomodoro(focus_entry, break_entry, countdown_label, end_button):
     end_button.config(state="normal")
 
 def end_session(end_button):
+    """End the Pomodoro session."""
     global pomodoro_thread
     if pomodoro_thread and pomodoro_thread.is_alive():
         pomodoro_thread.join()  # Wait for the Pomodoro thread to finish
         end_button.config(state="disabled")
 
 def main():
+    """Main function to set up the GUI."""
     root = tk.Tk()
     root.title("Pomodoro Timer")
 
